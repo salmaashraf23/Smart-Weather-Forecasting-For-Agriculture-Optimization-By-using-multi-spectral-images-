@@ -1,0 +1,121 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  // Font Awesoem
+  //- link(rel='stylesheet' href='./css/all.min.css')
+  // Render All CSS Elements
+  link(rel='stylesheet' href='/css/normalize.css')
+  // Google Fonts => Poppins
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css')
+  link(href='https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&family=Cairo:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap' rel='stylesheet')
+  // Main CSS File
+  link(rel='stylesheet' href='/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/css/all.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/dashboard.css')
+  title #{title}
+input#check(type='checkbox')
+header
+  nav#navbar.dash-nav.d-flex.justify-content-between.align-items-center
+    label(for='check')
+      i#sidebar_btn_dash.fa.fa-bars.sidebar_btn_dash(aria-hidden='true')
+    //- a.dark-mode.text-center(href='#')
+    //-   img#dark-icon(src='/images/moon.png' alt='dark-mode-icon')
+    div
+      ul.m-0.p-0.d-flex
+        a.nav__el.d-flex.align-items-center(href='#')
+          img.nav__user-img(src=`/img/users/${user.photo}` alt='user photo')
+          span.user-name= user.name.split(' ')[0]
+//- .dash-side-bar
+//-   center
+//-     h4= user.name
+//-     h6= user.role
+//-   a#createFarmBtnSidebar(href='#')
+//-     i.fa-solid.fa-display(style='color: #0fbf53;')
+//-     span Create farm
+//-   a#accountSettingBtnSidebar(href='/dashboard/me')
+//-     i.fa-solid.fa-user(style='color: #0fbf53;')
+//-     span profile
+//-   a#showFarmBtnSidebar(href='#')
+//-     i.fa-solid.fa-tractor(style='color: #0fbf53;')
+//-     span farms
+//-   a#showUsersBtnSidebar(href='/dashboard/users')
+//-     i.fa-solid.fa-users(style='color: #0fbf53;')
+//-     span Manage users
+//-   a(href='#')
+//-     i.fa-solid.fa-bars-progress(style='color: #0fbf53;')
+//-     span Manage farms
+//-   a.dash-logout.fw-bold.fs-5(href='#')
+//-     i.fa-solid.fa-right-from-bracket(style='color: #0fbf53;')
+//-     span Logout
+.dash-content.position-relative
+  .content-body
+    .container
+      .Show-users-dash.animate__animated.animate__fadeInLeft
+        //- table.table
+        //-   thead
+        //-     tr
+        //-       th Name
+        //-       th Email
+        //-       th Role
+        //-       th Update
+        //-       th delete
+        //-   tbody
+        //-   each user in users
+        //-     tr
+        //-       td user.name
+        //-       td user.email
+        //-       td user.role
+        //-       td
+        //-         a(href=`/dashboard/user/${user.id}`)
+        //-           button.btn.btn-success Update
+        //-       td
+        //-         button.btn.btn-danger Delete
+        //- .pagination
+        //-   button.pagination-Prev(onclick='prevPagination()')
+        //-     i.fa-solid.fa-arrow-left
+        //-     |  prev
+        //-   ul
+        //-     li.pagination-link.active(value='1' onclick='activePagination()') 1
+        //-     li.pagination-link(value='2' onclick='activePagination()') 2
+        //-     li.pagination-link(value='3' onclick='activePagination()') 3
+        //-   button.pagination-next(onclick='nextPagination()')
+        //-     | next 
+        //-     i.fa-solid.fa-arrow-right
+        .layer
+          .apdate-user-setting-admin.position-relative
+            form.update-user-admin
+              input#userId(type='hidden', name='userId', value=`${user.id}`)
+              label(for='fname') Name
+              br
+              input#fname(type='text' name='fname' value=`${user.name}`)
+              br
+              label(for='lname') Email
+              br
+              input#lname(type='email' name='lname' value=`${user.email}`)
+              br
+              label(for='Role') Role
+              select#Role.Role-select(name='role')
+                option(value='admin' selected=user.role==='admin') admin
+                option(value='user' selected=user.role==='user') user
+              br
+              label(for='Email-Confirm') Email Confirm
+              select#Email-Confirm.Email-Confirm(name='emailConfirm')
+                option(value='Yes' selected=user.confirmEmail) Yes
+                option(value='No' selected=!user.confirmEmail) No
+              br
+              .text-center
+                button(id='') Update
+            a(href='/dashboard/users')
+              i.fa-regular.fa-circle-xmark.position-absolute.top-0.end-0.me-2.my-3.fa-lg
+
+
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')
+script(src='/js/alert.js')  
+script(src='/js/bootstrap.bundle.min.js')
+script(src='/js/dashboard.js')
+script(src='/js/bundle.js')

@@ -1,0 +1,309 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  // Font Awesoem
+  //- link(rel='stylesheet' href='./css/all.min.css')
+  // Render All CSS Elements
+  link(rel='stylesheet' href='/css/normalize.css')
+  // Google Fonts => Poppins
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&family=Cairo:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap' rel='stylesheet')
+  // Main CSS File
+  link(rel='stylesheet' href='/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/css/all.css')
+  link(rel='stylesheet' href='/css/style.css')
+  title Smart weather forcasting for agricutural optimization
+header
+  nav#navbar.d-flex.justify-content-between.align-items-center.nav-for-lap
+    a.logo(href='#')
+      img(src='/images/Logo2.png' alt='')
+    ul.m-0.p-0.d-flex.ms-auto.align-items-center
+      li
+        a.mx-3.fs-5.fw-medium(href='#home') Home
+      li
+        a.mx-3.fs-5.fw-medium(href='#Our-Solution') Solution
+      li
+        a.mx-3.fs-5.fw-medium(href='#models') Models
+      li
+        a.mx-3.fs-5.fw-medium(href='#Our-Features') Features
+      if user
+        li
+          a.nav__el-user.px-3.fs-5.fw-medium.d-flex.align-items-center(href='/dashboard/me')
+            img.nav__user-img(src=`/img/users/${user.photo}` alt='user photo')
+            span.user-name= user.name.split(' ')[0]
+        li
+          a.px-3.fs-5.fw-bold.logout-btn(href='')
+            span Logout
+            i.fa-solid.fa-right-from-bracket.ms-2(style='color: #0fbf53;')
+      else 
+        li
+          a.px-3.fs-5.fw-medium.signupHome(href='/signup') Start Trial
+        li
+          a.px-3.fs-5.fw-medium.loginHome(href='/login') Login
+  nav#navbar.d-flex.justify-content-between.align-items-center.nav-for-res
+    a.logo(href='#')
+      img(src='./images/Logo2.png' alt='')
+    if user
+      ul.nav.nav-tabs
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false')
+            .nav__el-user.px-3.fs-5.fw-medium.d-flex.align-items-center
+              img.nav__user-img(src=`/img/users/${user.photo}` alt='')
+              span.user-name= user.name.split(' ')[0]
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='#home') Home
+            li
+              a.dropdown-item(href='#Our-Solution') Solution
+            li
+              a.dropdown-item(href='#models') Models
+            li
+              a.dropdown-item(href='#Our-Features') Features
+            li
+              hr.dropdown-divider
+            li
+              a.px-3.fs-5.fw-bold.logout-btn(href='')
+                span Logout
+                i.fa-solid.fa-right-from-bracket.ms-2(style='color: #0fbf53;')
+    else 
+      ul.m-0.p-0.d-flex.ms-auto.align-items-center
+        li
+          a.px-3.fs-5.fw-medium.signup(href='/signup') Start Trial
+        li
+          a.px-3.fs-5.fw-medium.loginHome(href='/login') Login              
+
+    
+section#home.landing
+  .layer.d-flex.justify-content-center.align-items-center.text-center
+    a(href='#Contact-Us')
+      i.fa-solid.fa-angles-down.arrow-down
+    .content
+      h1.text-white Smart weather forcasting for agriculture optimization
+      if user 
+        .free-button.m-5
+          a.free.fw-bold(href='/dashboard')
+            | Dashboard
+            i.fa-solid.fa-arrow-right
+      else 
+        .free-button.m-5
+          a.free.fw-bold(href='/signup')
+            | Create Free Account
+            i.fa-solid.fa-arrow-right
+section.nav-scroll
+  ul
+    li
+      a.dot.active(href='#home' data-scroll='home')
+        span home
+    li
+      a.dot(href='#Our-Solution' data-scroll='Our-Solution')
+        span Our-Solution
+    li
+      a.dot(href='#models' data-scroll='models')
+        span Models
+    li
+      a.dot(href='#Our-Features' data-scroll='Our-Features')
+        span Our-Features
+    li
+      a.dot(href='#How-we-do-it' data-scroll='How-we-do-it')
+        span How-we-do-it
+    li
+      a.dot(href='#Contact-Us' data-scroll='Contact-Us')
+        span Contact-Us
+section#Our-Solution.Our-Solution.py-5
+  h1.fw-bold Our solutions
+  .container.position-relative
+    #slide
+      .item(style='background-image: url(/images/multispectral.jpeg);')
+        .content
+          .name Model Of MultiSpectral Image
+          .des
+            | Is a technology that allows the acquisition of high-resolution images with a large number of spectral bands
+          button See more
+      .item(style='background-image: url(/images/weather.jpeg);')
+        .content
+          .name Model Of Weather Forcasting
+          .des
+            | Weather forecasts in real-time typically rely on a combination of observational data and numerical weather models to provide up-to-date information about current and future weather conditions.
+          button See more
+      .item(style='background-image: url(/images/Weather2.jpg);')
+        .content
+          .name Model Of Crop
+          .des
+            | Crop models are mathematical algorithms that capture the quantitative information of agronomy and physiology experiments in a way that can explain and predict crop growth and development
+          button See more
+    .buttons
+      button#prev
+        i.fa-solid.fa-angle-left.fa-xl
+      button#next
+        i.fa-solid.fa-angle-right.fa-xl
+section#models.models.py-5
+  .container
+    .row.d-flex.justify-content-center.align-items-center
+      h2.fw-bolder.my-5 Model Of MultiSpectral Image
+      .col-lg-8.col-sm-12.h-25
+        .model-content
+          p.fw-semibold
+            | usage of hyperspectral image is to improve crop management efficiency and obtain more productive and high-quality crops, it is possible to detect levels of nutrition, moisture, diseases, and pests that affect
+            | crops. With hyperspectral imaging, crops can be accurately monitored and image data
+            | analyzed to determine levels of nutrition, moisture, diseases, and pests. This can help
+            | identify the best ways to manage crops and improve their productivity and quality.
+            | Determining the type and nutrient and water content of the soil can also help us identify
+            | optimal characteristics for agriculture .
+      .col-lg-4.col-sm-12
+        .model-img
+          img(src='./images/crop-health-hyperspectral-rs.jpg' alt='model-of-crop-image')
+    .row.d-flex.justify-content-center.align-items-center
+      h2.fw-bolder.my-5.text-center Model Of Weather Forcasting
+      .col-lg-4.col-sm-12
+        .model-img
+          img(src='./images/imagejjs.jfif' alt='model-of-crop-image')
+      .col-lg-8.col-sm-12.h-25
+        .model-content
+          p.fw-semibold.mt-3
+            | Weather forecasts in real-time typically rely on a combination of
+            | observational data and numerical weather models ,Observational data includes measurements of temperature, humidity,
+            | wind speed and direction, precipitation, and other variables collected
+            | from weather stations, satellites, and other sources in weather forecasting can provide
+            | accurate and timely predictions of weather conditions at the moment.
+    .row.d-flex.justify-content-center.align-items-center
+      h2.fw-bolder.my-5 Model Of Crop
+      .col-lg-8.col-sm-12.h-25
+        .model-content
+          p.fw-semibold
+            | Crop yield modeling can help drive efficiency in agricultural production systems by allowing farmers to manage their inputs more efficiently. These models work to achieve maximum crop performance while minimizing inputs, such as fertilizers, irrigation, or other applications.
+      .col-lg-4.col-sm-12
+        .model-img
+          img(src='./images/download.jfif' alt='model-of-crop-image')
+section#Our-Features.Our-Features.py-5.position-relative
+  .container
+    h1.fw-bold Our Features
+    .row.py-4
+      .col-lg-6
+        #featureContent.feature-content
+          | 1 Improving farmers livelihood: By providing accurate weather forcasts, farmers can improve the management of their farms and increase their productivity.
+        #featureContent.feature-content
+          | 2 Poverty Reduction and Agricultural Employment: This can enhance employment opportunities and improve the economic and social conditions of the rural population
+        #featureContent.feature-content
+          | 3 Promoting sustainable development: through improving resource management and improving agricultural models.
+        #featureContent.feature-content
+          | 4 Promoting Education and Awareness: The project can contribute to raising awareness and knowledge among farmers and the local community about climate changes
+      .col-lg-6
+        #featureContent.feature-content
+          | 5 Better use of resources: With accurate weather forecasting, farmers can optimize the use of agricultural resources such as water, fertilizer, and pesticides.
+        #featureContent.feature-content
+          | 6 Increase productivity and profitability: This increases crop yields and improves their quality, which leads to higher production and sales.
+        #featureContent.feature-content
+          | 7 early warnings of severe weather events such as thunderstorms, floods, or droughts.
+        #featureContent.feature-content
+          | 8 Resource Allocation: farmers can allocate agricultural resources better. the other agricultural resources by targeting them based on weather forecasts
+  .sdg.d-flex.justify-content-evenly.align-items-center.overflow-hidden
+    #carouselExampleIndicators.carousel.slide
+      .inner-indicator
+        .carousel-inner
+          .carousel-item.active
+            .sdg-img.w-50.m-auto.text-center
+              img.w-100(src='images/sdg 12.jpg' alt='')
+          .carousel-item
+            .sdg-img.w-50.m-auto.text-center
+              img.w-100(src='images/sdg 8.jpg' alt='')
+          .carousel-item
+            .sdg-img.w-50.m-auto.text-center
+              img.w-100(src='images/sdg 2.jpg' alt='')
+          .carousel-item
+            .sdg-img.w-50.m-auto.text-center
+              img.w-100(src='images/sdg 13.jpg' alt='')
+        .carousel-indicators
+          button.active(type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1')
+          button(type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='1' aria-label='Slide 2')
+          button(type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='2' aria-label='Slide 3')
+          button(type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='3' aria-label='Slide 4')
+      button.carousel-control-prev(type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide='prev')
+        span.carousel-control-prev-icon(aria-hidden='true')
+        span.visually-hidden Previous
+      button.carousel-control-next(type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide='next')
+        span.carousel-control-next-icon(aria-hidden='true')
+        span.visually-hidden Next
+  .oursdg-first.text-capitalize
+    h3.fw-bolder.fs-1.m-0 OUR
+  .oursdg-secound
+    h3.fw-bolder.fs-1.m-0 SDG
+//
+  <section class="Our-Solution py-5" style="background-color: #eee;" id="Our-Solution">
+  <div class="container">
+  <h1 class="fw-bold">Our Models</h1>
+  <div class="row py-4 d-flex align-items-center m-auto justify-content-around">
+  <div class="col-3 solution-content">
+  <img class="w-100" src="./images/Weather3.jpg" alt="" />
+  <div class="text">
+  <h3>Model of weather forcasting</h3>
+  <p>
+  Save water and fertilizers and improve crop health and
+  productivity with soil and weather data.
+  </p>
+  </div>
+  </div>
+  <div class="col-3 solution-content">
+  <img class="w-100" src="./images/Weather3.jpg" alt="" />
+  <div class="text">
+  <h3>Model of weather forcasting</h3>
+  <p>
+  Save water and fertilizers and improve crop health and
+  productivity with soil and weather data.
+  </p>
+  </div>
+  </div>
+  <div class="col-3 solution-content">
+  <img class="w-100" src="./images/Weather3.jpg" alt="" />
+  <div class="text">
+  <h3>Model of weather forcasting</h3>
+  <p>
+  Save water and fertilizers and improve crop health and
+  productivity with soil and weather data.
+  </p>
+  </div>
+  </div>
+  </div>
+  </section>
+section#How-we-do-it.How-we-do-it.py-5
+  .container
+    h1.py-4.fw-bold How we do it
+    .row.How-video.py-4
+      iframe(width='560' height='315' src='https://www.youtube.com/embed/z4F1ITRZu1g?si=WS0GvKkfv2SUwWQq' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen='')
+section#Contact-Us
+  footer.vh-50
+    .container
+      h1.py-3.fw-bold Contact us
+      .row
+        .col-lg-6
+          form.mx-0.contact-form
+            label(for='name') Name
+            input#name.form-control.my-2(type='text' placeholder='Enter your name')
+            label(for='email') Email
+            input#email.form-control.my-2(type='text' placeholder='Enter your email')
+            label(for='description') Subject
+            input#description.form-control.my-2(type='text' placeholder='Enter your subject')
+            label(for='message') Description
+            textarea#message.form-control.my-2
+            button.text-black.mx-0.fs-5.fw-medium.submit.my-4.w-50(href='#') Submit
+        .col-lg-6
+          .footer-content.text-center.m-4
+            .logo
+              a.logo(href='#')
+                img(src='./images/Logo2.png' alt='')
+            .project-name.py-3
+              h5.fw-semibold Smart Weather forcastion For agriculute optimization
+            .social.py-4
+              i.fa-brands.fa-facebook.fa-2xl
+              i.fa-brands.fa-instagram.fa-2xl
+              i.fa-brands.fa-twitter.fa-2xl
+              i.fa-brands.fa-linkedin.fa-2xl
+            .copy-write.py-3
+              p.fs-5.opacity-75 Copyright &copy; 2023 Khaled Hosny
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js' charset='utf-8')
+script(src='/js/alert.js')  
+script(src='/js/bootstrap.bundle.min.js')
+script(src='/js/main.js')
+script(src='/js/bundle.js')

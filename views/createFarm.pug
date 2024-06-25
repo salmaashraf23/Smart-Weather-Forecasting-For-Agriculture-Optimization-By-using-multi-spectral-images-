@@ -1,0 +1,153 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  // Font Awesoem
+  //- link(rel='stylesheet' href='/css/all.min.css')
+  // Render All CSS Elements
+  link(rel='stylesheet' href='/css/normalize.css')
+  // Google Fonts => Poppins
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css')
+  link(href='https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&family=Cairo:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap' rel='stylesheet')
+  // Main CSS File
+  link(rel='stylesheet' href='/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/css/all.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/dashboard.css')
+  title #{title}
+input#check(type='checkbox')
+header
+  nav#navbar.dash-nav.d-flex.justify-content-between.align-items-center.dash-nav-lap
+    label(for='check')
+      i#sidebar_btn_dash.fa.fa-bars.sidebar_btn_dash(aria-hidden='true')
+    //- a.dark-mode.text-center(href='#')
+    //-   img#dark-icon(src='./images/moon.png' alt='dark-mode-icon')
+    div
+      ul.m-0.p-0.d-flex
+        a.nav__el.d-flex.align-items-center(href='/dashboard/me')
+          img.nav__user-img(src=`/img/users/${user.photo}` alt='user photo')
+          span.user-name= user.name.split(' ')[0]
+  
+  nav#navbar.dash-nav.d-flex.justify-content-end.align-items-center.dash-nav-res
+    ul.nav.nav-tabs
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false')
+          .nav__el-user.px-3.fs-5.fw-medium.d-flex.align-items-center
+            img.nav__user-img(src=`/img/users/${user.photo}` alt='')
+            span.user-name= user.name.split(' ')[0]
+        ul.dropdown-menu
+          if (user.role === 'admin')
+            li
+              a.dropdown-item(href='/create-farm') Create farm
+            li
+              a.dropdown-item(href='/dashboard/me') profile
+            li
+              a.dropdown-item(href=`/dashboard/${user._id}/my-farms`) farms
+            li
+              a.dropdown-item(href='/dashboard/users') Manage users
+            li
+              a.dropdown-item(href='/dashboard/farms') Manage farms
+            li
+              a.dropdown-item(href='/Home') Home
+            li
+              hr.dropdown-divider
+            li
+              a.px-3.fs-5.fw-bold.logout-btn(href='')
+                span Logout
+                i.fa-solid.fa-right-from-bracket.ms-2(style='color: #0fbf53;')
+          else 
+            li
+              a.dropdown-item(href='/create-farm') Create farm
+            li
+              a.dropdown-item(href='/dashboard/me') profile
+            li
+              a.dropdown-item(href=`/dashboard/${user._id}/my-farms`) farms
+            li
+              a.dropdown-item(href=`/Home`) Home
+
+.dash-side-bar
+  center
+    h4= user.name 
+    h6= user.role
+  if (user.role === 'admin')
+    a#createFarmBtnSidebar(href='/create-farm')
+      i.fa-solid.fa-display(style='color: #0fbf53;')
+      span Create farm
+    a#accountSettingBtnSidebar(href='/dashboard/me')
+      i.fa-solid.fa-user(style='color: #0fbf53;')
+      span profile
+    a#showFarmBtnSidebar(href=`/dashboard/${user._id}/my-farms`)
+      i.fa-solid.fa-tractor(style='color: #0fbf53;')
+      span farms
+    a#showUsersBtnSidebar(href='/dashboard/users')
+      i.fa-solid.fa-users(style='color: #0fbf53;')
+      span Manage users
+    a(href='/dashboard/farms')
+      i.fa-solid.fa-bars-progress(style='color: #0fbf53;')
+      span Manage farms
+    a(href='/Home')
+      i.fa-solid.fa-house(style='color: #0fbf53;')
+      span Home
+    a.dash-logout.fw-bold.fs-5.logout-btn(href='#')
+      i.fa-solid.fa-right-from-bracket(style='color: #0fbf53;')
+      span Logout
+  else 
+    a#createFarmBtnSidebar(href='/create-farm')
+      i.fa-solid.fa-display(style='color: #0fbf53;')
+      span Create farm
+    a#accountSettingBtnSidebar(href='/dashboard/me')
+      i.fa-solid.fa-user(style='color: #0fbf53;')
+      span profile
+    a#showFarmBtnSidebar(href=`/dashboard/${user._id}/my-farms`)
+      i.fa-solid.fa-tractor(style='color: #0fbf53;')
+      span farms
+    a#showFarmBtnSidebar(href=`/Home`)
+      i.fa-solid.fa-house(style='color: #0fbf53;')
+      span Home
+    a.dash-logout.fw-bold.fs-5.logout-btn(href='#')
+      i.fa-solid.fa-right-from-bracket(style='color: #0fbf53;')
+      span Logout
+
+
+.dash-content.position-relative
+  .content-body
+    .container
+      .create-farm.animate__animated.animate__fadeInLeft
+        .step-row-farm-creation
+          #progressFarmStep.farm-creation-progress.with-after
+          .step-col-farm-creation
+            small Step 1
+          .step-col-farm-creation
+            small Step 2
+          .step-col-farm-creation
+            small Step 3
+        form.w-100.form-container.farm-form(action='')
+          #FormStep1.animate__animated.animate__fadeInLeft
+            h3 What is your farm name ?
+            input#farmName(type='text' placeholder='Enter farm name')
+            input#userId(type='hidden', name='userId', value=`${user.id}`)
+            .btn-box
+              button#nextStep1.signup-btn.w-25.mx-0.my-5.next-step
+                | next
+          #FormStep2.animate__animated.animate__fadeInLeft
+            h3 What is your farm location ?
+            input#longitude(type='text' placeholder='langitude')
+            input#latitude(type='text' placeholder='longitude')
+            .btn-box
+              button#backStep1.signup-btn.w-25.mx-0.my-5.next-step  back 
+              button#nextStep2.signup-btn.w-25.mx-0.my-5.prev-step  next 
+          #FormStep3.animate__animated.animate__fadeInLeft
+            h3 Set your prediction time 
+            input#predictionTime(type='text' placeholder='YYYY-MM-DD')
+            .btn-box
+              button#backStep2.signup-btn.w-25.mx-0.my-5.prev-step  back 
+              button.signup-btn.w-25.mx-0.my-5.create-farm-btn(id='') submit
+
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')  
+script(src='/js/alert.js')   
+script(src='/js/bootstrap.bundle.min.js')
+script(src='/js/dashboard.js')
+script(src='/js/bundle.js')

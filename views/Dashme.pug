@@ -1,0 +1,169 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  // Font Awesoem
+  //- link(rel='stylesheet' href='/css/all.min.css')
+  // Render All CSS Elements
+  link(rel='stylesheet' href='/css/normalize.css')
+  // Google Fonts => Poppins
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css')
+  link(href='https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&family=Cairo:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap' rel='stylesheet')
+  // Main CSS File
+  link(rel='stylesheet' href='/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/css/all.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/dashboard.css')
+  title #{title}
+input#check(type='checkbox')
+header
+  nav#navbar.dash-nav.d-flex.justify-content-between.align-items-center.dash-nav-lap
+    label(for='check')
+      i#sidebar_btn_dash.fa.fa-bars.sidebar_btn_dash(aria-hidden='true')
+    //- a.dark-mode.text-center(href='#')
+    //-   img#dark-icon(src='./images/moon.png' alt='dark-mode-icon')
+    div
+      ul.m-0.p-0.d-flex
+        a.nav__el.d-flex.align-items-center(href='/dashboard/me')
+          img.nav__user-img(src=`/img/users/${user.photo}` alt='user photo')
+          span.user-name= user.name.split(' ')[0]
+  
+  nav#navbar.dash-nav.d-flex.justify-content-end.align-items-center.dash-nav-res
+    ul.nav.nav-tabs
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false')
+          .nav__el-user.px-3.fs-5.fw-medium.d-flex.align-items-center
+            img.nav__user-img(src=`/img/users/${user.photo}` alt='')
+            span.user-name= user.name.split(' ')[0]
+        ul.dropdown-menu
+          if (user.role === 'admin')
+            li
+              a.dropdown-item(href='/create-farm') Create farm
+            li
+              a.dropdown-item(href='/dashboard/me') profile
+            li
+              a.dropdown-item(href=`/dashboard/${user._id}/my-farms`) farms
+            li
+              a.dropdown-item(href='/dashboard/users') Manage users
+            li
+              a.dropdown-item(href='/dashboard/farms') Manage farms
+            li
+              a.dropdown-item(href='/Home') Home
+            li
+              hr.dropdown-divider
+            li
+              a.px-3.fs-5.fw-bold.logout-btn(href='')
+                span Logout
+                i.fa-solid.fa-right-from-bracket.ms-2(style='color: #0fbf53;')
+          else 
+            li
+              a.dropdown-item(href='/create-farm') Create farm
+            li
+              a.dropdown-item(href='/dashboard/me') profile
+            li
+              a.dropdown-item(href=`/dashboard/${user._id}/my-farms`) farms
+            li
+              a.dropdown-item(href=`/Home`) Home
+
+.dash-side-bar
+  center
+    h4= user.name 
+    h6= user.role
+  if (user.role === 'admin')
+    a#createFarmBtnSidebar(href='/create-farm')
+      i.fa-solid.fa-display(style='color: #0fbf53;')
+      span Create farm
+    a#accountSettingBtnSidebar(href='/dashboard/me')
+      i.fa-solid.fa-user(style='color: #0fbf53;')
+      span profile
+    a#showFarmBtnSidebar(href=`/dashboard/${user._id}/my-farms`)
+      i.fa-solid.fa-tractor(style='color: #0fbf53;')
+      span farms
+    a#showUsersBtnSidebar(href='/dashboard/users')
+      i.fa-solid.fa-users(style='color: #0fbf53;')
+      span Manage users
+    a(href='/dashboard/farms')
+      i.fa-solid.fa-bars-progress(style='color: #0fbf53;')
+      span Manage farms
+    a(href='/Home')
+      i.fa-solid.fa-house(style='color: #0fbf53;')
+      span Home
+    a.dash-logout.fw-bold.fs-5.logout-btn(href='#')
+      i.fa-solid.fa-right-from-bracket(style='color: #0fbf53;')
+      span Logout
+  else 
+    a#createFarmBtnSidebar(href='/create-farm')
+      i.fa-solid.fa-display(style='color: #0fbf53;')
+      span Create farm
+    a#accountSettingBtnSidebar(href='/dashboard/me')
+      i.fa-solid.fa-user(style='color: #0fbf53;')
+      span profile
+    a#showFarmBtnSidebar(href=`/dashboard/${user._id}/my-farms`)
+      i.fa-solid.fa-tractor(style='color: #0fbf53;')
+      span farms
+    a#showFarmBtnSidebar(href=`/Home`)
+      i.fa-solid.fa-house(style='color: #0fbf53;')
+      span Home
+    a.dash-logout.fw-bold.fs-5.logout-btn(href='#')
+      i.fa-solid.fa-right-from-bracket(style='color: #0fbf53;')
+      span Logout
+
+
+.dash-content.position-relative
+  .content-body
+    .container
+      .account-setting-dash.animate__animated.animate__fadeInLeft
+        h3 YOUR ACCOUNT SETTINGS
+        .row.gx-3
+          .col-lg-5.position-relative
+            form.setting-info.form-user-data(action='' enctype='multipart/form-data')
+              .form-group
+                label(for='name') Name
+                input#name(type='text' name='name' placeholder='Your Name' value=`${user.name}` required='')
+              .form-group
+                if user.confirmEmail
+                  label(for='email') Email
+                else 
+                  .d-flex.justify-content-between.Inactive-email
+                    label(for='email') Email:
+                    div
+                      a.confirm-email(href='') confirm your email 
+                      i.fa-solid.fa-triangle-exclamation(style='color: red;')
+                input#email(type='email' name='email' placeholder='Your Email' value=`${user.email}` required='')
+              .form-group.d-flex.align-items-center
+                img(src=`/img/users/${user.photo}`, alt='User photo')
+                input#myphoto.your-photo-upload(type='file' name='myphoto' accept='image/*')
+              .d-flex.justify-content-between
+                .text-start
+                  button.Delete-acc-btn
+                    span.text Delete
+                    span.icon
+                      svg(xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewbox='0 0 24 24')
+                        path(d='M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z')
+                .text-end
+                  button.signup-btn.save-settting-user(type='submit') save settings
+          .col-1.position-relative
+            .text-center
+              .vertical-line-dash
+          .col-lg-5.position-relative
+            form.setting-info.form-user-password(action='')
+              .form-group
+                label(for='current-password') Current password
+                input#current-password(type='password' name='current-password' placeholder='••••••••' required='')
+              .form-group
+                label(for='new-password') New password
+                input#new-password(type='password' name='new-password' placeholder='••••••••' required='')
+              .form-group
+                label(for='confirm-password') Confirm password
+                input#confirm-password(type='password' name='confirm-password' placeholder='••••••••' required='')
+              .text-end
+                button.signup-btn.btn--save-password Save password
+
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')  
+script(src='/js/alert.js')   
+script(src='/js/bootstrap.bundle.min.js')
+script(src='/js/dashboard.js')
+script(src='/js/bundle.js')
